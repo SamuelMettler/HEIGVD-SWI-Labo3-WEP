@@ -15,37 +15,41 @@ from rc4 import RC4
 import zlib
 
 #Cle wep AA:AA:AA:AA:AA
-key= b'\xaa\xaa\xaa\xaa\xab'
+key= b'\xaa\xaa\xaa\xaa\xaa'
 iv = b'\xca\xfe\xfe'
 
 #lecture de message chiffré - rdpcap retourne toujours un array, même si la capture contient un seul paquet
 arp = rdpcap('arp.cap')[0]
 
-arp.data = 'FF:FF:FF:FF:FF:FF'
-print (arp[Dot11].addr1)
+#arp.data = 'FF:FF:FF:FF:FF:FF'
 
-#data = "c est un message compose de 36 chars"
-data = arp.data
+data = "c est un message compose de 36 chars"
+# on calcule l'icv avec crc32
 icv = zlib.crc32(bytes(data, 'utf-8'))
 
 # rc4 seed est composé de IV+clé
 seed = iv+key
 # on génère la classe
-cipher = RC4(seed)
-icvByte = struct.pack('!L', icv)
+cipher = RC4(seed, False)
+
+# on génère l'icv en byte
+icvByte = struct.pack('<l', icv)
+# on génère le data en byte pour ensuite concatener
 dataByte = bytes(data, 'utf-8')
 dataCombine = dataByte + icvByte
 
+# on met la valeur de l'icv dans l'arp
+arp.icv = struct.unpack('!L', dataCombine[-4:])[0]
+# on chiffre le message et le place dans l'arp et on renseigne l'iv
 cipherText = cipher.crypt(dataCombine)
-
-arp.data = cipherText
+arp.wepdata = cipherText
+arp.iv = iv
 
 # Check
 print ("Message en clair : "+data)
 print ("Message chiffré : "+cipherText.hex())
-cipher = RC4(seed)
 print ("Message déchiffré : "+cipher.crypt(cipherText)[:-4].decode('utf-8'))
 
 # Créer le nouveau pcap chiffré
-wrpcap('crypted_pkt.pcap', arp, append=True)
+wrpcap('crypted_pkt.cap', arp)
 

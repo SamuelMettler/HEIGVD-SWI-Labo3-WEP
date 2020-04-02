@@ -80,16 +80,23 @@ Dans cette partie, vous allez récupérer le script Python `manual-decryption.py
 
 Capture Wireshark :
 
-![](/home/oki/Documents/HEIG/S6/SWI/labos/labo3-WEP/img/decrypted_arp_ws.png)
+![](img/decrypted_arp_ws.png)
 
 Capture sortie script `manuel-decryption.py` :
 
-![](/home/oki/Documents/HEIG/S6/SWI/labos/labo3-WEP/img/decrypted_arp_script.png)
+![](img/decrypted_arp_script.png)
+
+On peut noter que l'IVC affiché dans wireshark est l'IVC chiffré, c'est pourquoi il ne correspond pas au même écrit dans le script python.
 
 ### 2. Chiffrement manuel de WEP
 
 Utilisant le script `manual-decryption.py` comme guide, créer un nouveau script `manual-encryption.py` capable de chiffrer un message, l’enregistrer dans un fichier pcap et l’envoyer.
 Vous devrez donc créer votre message, calculer le contrôle d’intégrité (ICV), et les chiffrer (voir slides du cours pour les détails).
+
+Voici la capture d'écran de wireshark : 
+![capture WS](img/decrypted_custom_trame.png)
+
+Le script généré se nomme `manual-encryption.py`
 
 
 ### Quelques éléments à considérer :
