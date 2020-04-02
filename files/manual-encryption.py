@@ -24,7 +24,7 @@ icv = zlib.crc32(bytes(data, 'utf-8'))
 # rc4 seed est composé de IV+clé
 seed = iv+key
 # on génère la classe
-cipher = RC4(seed)
+cipher = RC4(seed)git st
 icvByte = struct.pack('!L', icv)
 dataByte = bytes(data, 'utf-8')
 dataCombine = dataByte + icvByte
