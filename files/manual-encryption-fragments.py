@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-""" Manually decrypt a wep message given the WEP key"""
+""" Manually encrypt three fragments with WEP """
 
 __author__      = "Samuel Mettler & Olivier Koffi"
 __copyright__   = "Copyright 2017, HEIG-VD"
@@ -54,8 +54,13 @@ wrpcap('crypted_pkt_frag.cap', arp1, append=True)
 arp2.FCfield |= 0x4
 arp2.SC += 1 
 wrpcap('crypted_pkt_frag.cap', arp2, append=True)
-arp3.FCfield = 0x841
+arp3.FCfield &= 0xFFB
 arp3.SC += 1
 wrpcap('crypted_pkt_frag.cap', arp3, append=True)
+
+# On envoie les paquets
+sendp(arp1)
+sendp(arp2)
+sendp(arp3)
 
 

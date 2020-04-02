@@ -86,14 +86,14 @@ Capture sortie script `manuel-decryption.py` :
 
 ![](img/decrypted_arp_script.png)
 
-On peut noter que l'IVC affiché dans wireshark est l'IVC chiffré, c'est pourquoi il ne correspond pas au même écrit dans le script python.
+Note : L'ICV affiché dans Wireshark est l'IVC chiffré, c'est pourquoi il ne correspond pas à celui du script python qui est l'ICV en clair.
 
 ### 2. Chiffrement manuel de WEP
 
 Utilisant le script `manual-decryption.py` comme guide, créer un nouveau script `manual-encryption.py` capable de chiffrer un message, l’enregistrer dans un fichier pcap et l’envoyer.
 Vous devrez donc créer votre message, calculer le contrôle d’intégrité (ICV), et les chiffrer (voir slides du cours pour les détails).
 
-Voici la capture d'écran de wireshark : 
+Voici la capture d'écran de Wireshark : 
 ![capture WS](img/decrypted_custom_trame.png)
 
 Le script généré se nomme `manual-encryption.py`
@@ -121,6 +121,22 @@ Dans cette partie, vous allez enrichir votre script développé dans la partie p
 - Pour vérifier que cette partie fonctionne, vous pouvez importer vos fragments dans Wireshark, qui doit être capable de les recomposer
 - Pour un test encore plus intéressant (optionnel), vous pouvez utiliser un AP (disponible sur demande) et envoyer vos fragments. Pour que l’AP accepte vous données injectées, il faudra faire une « fake authentication » que vous pouvez faire avec `aireplay-ng`
 - Si l’AP accepte vos fragments, il les recomposera et les retransmettra en une seule trame non-fragmentée !
+
+Le script généré se nomme `manual-encryption-fragments.py`
+
+Capture Wireshark - fragement chiffré :
+
+![](./img/crypted_fragment.png)
+
+Capture Wireshark - fragement déchiffré :
+
+![](./img/decrypted_fragment.png)
+
+Capture Wireshark - trame réassemblée déchiffré :
+
+![](./img/full_decrypted_frame.png)
+
+Note : Les trois fragments contiennent des données identiques : `"c est un message compose de 36 chars"`
 
 ## Livrables
 
