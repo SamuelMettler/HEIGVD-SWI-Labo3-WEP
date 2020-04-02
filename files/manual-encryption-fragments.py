@@ -49,13 +49,13 @@ arp1.iv = arp2.iv = arp3.iv = iv
 
 # On active le bit "more fragments" pour toutes les trames sauf la dernière et on incrémente le compteur de fragments pour chaque nouveau fragment.
 arp1.FCfield |= 0x4
-arp2.SC = 0
-wrpcap('crypted_pkt_frag.pcap', arp1, append=True)
+arp1.SC = 0
+wrpcap('crypted_pkt_frag.cap', arp1, append=True)
 arp2.FCfield |= 0x4
 arp2.SC += 1 
-wrpcap('crypted_pkt_frag.pcap', arp2, append=True)
-arp3.FCfield &= 0xB
+wrpcap('crypted_pkt_frag.cap', arp2, append=True)
+arp3.FCfield = 0x841
 arp3.SC += 1
-wrpcap('crypted_pkt_frag.pcap', arp3, append=True)
+wrpcap('crypted_pkt_frag.cap', arp3, append=True)
 
 
