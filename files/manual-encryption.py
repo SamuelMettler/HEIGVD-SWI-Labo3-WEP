@@ -13,6 +13,7 @@ from scapy.all import *
 import binascii
 from rc4 import RC4
 import zlib
+
 #Cle wep AA:AA:AA:AA:AA
 key= b'\xaa\xaa\xaa\xaa\xaa'
 iv = b'\xca\xfe\xfe'
@@ -30,3 +31,8 @@ dataCombine = dataByte + icvByte
 
 cipherText = cipher.crypt(dataCombine)
 
+# Check
+print ("Message en clair : "+data)
+print ("Message chiffré : "+cipherText.hex())
+cipher = RC4(seed)
+print ("Message déchiffré : "+cipher.crypt(cipherText)[:-4].decode('utf-8'))
