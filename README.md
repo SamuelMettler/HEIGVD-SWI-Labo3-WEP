@@ -86,7 +86,7 @@ Capture sortie script `manuel-decryption.py` :
 
 ![](img/decrypted_arp_script.png)
 
-Note : L'ICV affiché dans Wireshark est l'IVC chiffré, c'est pourquoi il ne correspond pas à celui du script python qui est l'ICV en clair.
+Note : L'ICV affiché dans Wireshark est l'ICV chiffré, c'est pourquoi il ne correspond pas à celui du script python qui est l'ICV en clair.
 
 ### 2. Chiffrement manuel de WEP
 
